@@ -34,10 +34,10 @@ RUN export CONSUL_TEMPLATE_VERSION=0.18.3 \
     && rm /tmp/consul-template.zip
 
 # Add Containerpilot and set its configuration
-ENV CONTAINERPILOT_VER 3.0.0
+ENV CONTAINERPILOT_VER 3.5.1
 ENV CONTAINERPILOT /etc/containerpilot.json5
 
-RUN export CONTAINERPILOT_CHECKSUM=6da4a4ab3dd92d8fd009cdb81a4d4002a90c8b7c \
+RUN export CONTAINERPILOT_CHECKSUM=7ee8e59588b6b593325930b0dc18d01f666031d7 \
     && curl -Lso /tmp/containerpilot.tar.gz \
          "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VER}/containerpilot-${CONTAINERPILOT_VER}.tar.gz" \
     && echo "${CONTAINERPILOT_CHECKSUM}  /tmp/containerpilot.tar.gz" | sha1sum -c \
@@ -45,11 +45,11 @@ RUN export CONTAINERPILOT_CHECKSUM=6da4a4ab3dd92d8fd009cdb81a4d4002a90c8b7c \
     && rm /tmp/containerpilot.tar.gz
 
 # Add Dehydrated
-RUN export DEHYDRATED_VERSION=v0.3.1 \
+RUN export DEHYDRATED_VERSION=v0.4.0 \
     && curl --retry 8 --fail -Lso /tmp/dehydrated.tar.gz "https://github.com/lukas2511/dehydrated/archive/${DEHYDRATED_VERSION}.tar.gz" \
     && tar xzf /tmp/dehydrated.tar.gz -C /tmp \
-    && mv /tmp/dehydrated-0.3.1/dehydrated /usr/local/bin \
-    && rm -rf /tmp/dehydrated-0.3.1
+    && mv /tmp/dehydrated-0.4.0/dehydrated /usr/local/bin \
+    && rm -rf /tmp/dehydrated-0.4.0
 
 # Add jq
 RUN export JQ_VERSION=1.5 \
