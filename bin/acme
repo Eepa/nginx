@@ -22,7 +22,7 @@ CERT_DIR="/var/www/ssl"
 ACME_ENV=${ACME_ENV:-staging}
 
 function getConsulSession () {
-    if [ -f $SESSION_FILE ]; then 
+    if [ -f $SESSION_FILE ]; then
         SID=$(cat ${SESSION_DIR}/session)
         local STATUS=$(curl -s ${CONSUL_ROOT}/session/info/${SID})
         if [ "${STATUS}" != "[]" ]; then
@@ -136,13 +136,13 @@ case "$1" in
         shift
         renewConsulSession &&
         acquireLeader &&
-        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV}
+        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV} --accept-terms
         ;;
     renew-certs)
         shift
         renewConsulSession &&
         (acquireLeader || exit 0) &&
-        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV}
+        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV} --accept-terms
         ;;
     clean-certs)
         shift
@@ -159,7 +159,7 @@ case "$1" in
     checkin)
         renewConsulSession &&
         ( acquireLeader || exit 0 ) &&
-        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV} &&
+        ${SCRIPTPATH}/dehydrated --cron --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV} --accept-terms &&
         ${SCRIPTPATH}/dehydrated --cleanup --domain ${ACME_DOMAIN} --hook /etc/acme/dehydrated/hook.sh --config /etc/acme/dehydrated/config.${ACME_ENV}
         ;;
     *)

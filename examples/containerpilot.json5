@@ -55,7 +55,7 @@
       port: 443,
       interfaces: ["eth1", "eth0"],
       health: {
-        exec: "/usr/bin/curl --insecure --fail --silent --show-error --output /dev/null --header \"HOST: {{ .ACME_DOMAIN }}\" https://localhost/nginx-health",
+        exec: "/usr/bin/curl --insecure --fail --silent --show-error --output /dev/null --header \"HOST: {{ .ACME_DOMAIN }} https://localhost/nginx-health",
         interval: 10,
         ttl: 25
       }
