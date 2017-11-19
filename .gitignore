@@ -4,4 +4,4 @@
 # generated content
 ExampleFile
 .idea/
-nginx.iml
+*.iml
